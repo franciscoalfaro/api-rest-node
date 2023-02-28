@@ -1,0 +1,7 @@
+#npn init
+#npm install express --save
+#npm install mongoose --save
+#npm multer --save
+#npm validator --save
+#npm cors --save
+#npm nodemon --save-dev
