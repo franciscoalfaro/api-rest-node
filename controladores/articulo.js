@@ -1,4 +1,4 @@
-const validator = require("validator")
+const {validarArticulo}= require("../helpers/validar")
 const Articulo = require("../modelo/Articulo")
 
 const prueba=(req, res)=>{
@@ -15,31 +15,24 @@ const curso = ((req, res) =>{
 
 });
 
+
+//end-point para crear dato en BD
+
 const crear=(req, res)=>{
 
     //recoger los datos por post para ser guardados. 
     let parametros= req.body;
 
     //validacion de datos a guardar
-    try {
-        let validar_titulo = !validator.isEmpty(parametros.titulo) && validator.isLength(parametros.titulo,{min: 5, max:undefined});
-        let validar_contenido= !validator.isEmpty(parametros.contenido);
-
-        if(!validar_titulo || !validar_contenido){
-            throw new Error(" informacion no validada");
-        }
-        else{
-            console.log("datos guardados")
-        }
-
-        
+    try{
+        validarArticulo(parametros);
     } catch (error) {
-        return res.status(400).json({
-            status:"error",
-            mensaje:"faltan datos por enviar",
-        });
-        
-    }
+    return res.status(400).json({
+        status:"error",
+        mensaje:"faltan datos por enviar",
+    });
+    
+}
 
     //crear objeto a guardar
     const articulo = new Articulo(parametros);
@@ -48,8 +41,8 @@ const crear=(req, res)=>{
     //asignar valores a objeto basado en el modelo (manual o automatico)
 
     //guardar datos en la BD
-    articulo.save((err, articuloGuardado)=>{
-        if( err || !articuloGuardado){
+    articulo.save((error, articuloGuardado)=>{
+        if( error || !articuloGuardado){
             return res.status(400).json({
                 status:"error",
                 mensaje:"no se ha guardado el articulo"
@@ -70,9 +63,146 @@ const crear=(req, res)=>{
     
 }
 
+// end-piont para listar datos de la BD
+const listar = (req, res) =>{
+
+    let consulta = Articulo.find({})
+
+    //flag devuelve la cantidad de datos a solicitar
+    consulta.limit(1);
+
+    consulta.sort({fecha:-1}).exec((error, articulos)=>{
+        if(error|| !articulos){
+            return res.status(404).json({
+                status:"error",
+                mensaje:"articulo no encontrado"
+    
+            })
+        }
+
+        return res.status(200).send({
+            status:"success",
+            parametro: req.params.ultimos,
+            articulos,
+        });
+    });
+
+}
+
+// end-piont para buscar dato en la BD
+
+const buscar_articulo = (req, res)=>{
+
+    //recoger ID
+
+    let id= req.params.id;
+
+    console.log(id)
+
+    //buscar el articulo
+    Articulo.findById(id, (error, articulo)=>{    
+        //devolver error
+        if(error|| !articulo){
+            return res.status(404).json({
+                status:"error",
+                mensaje:"articulo no encontrado"
+    
+            })
+        }
+
+        //devolver resultado
+        return res.status(200).json({
+            status:"success",
+            articulo
+        });
+
+    })
+
+
+
+}
+
+
+//end-point para borrar dato de BD
+
+const borrar_articulo = (req, res)=>{
+
+    let id = req.params.id;
+
+    Articulo.findOneAndDelete({_id:id}, (error, articuloBorrado)=>{
+
+        if( error || !articuloBorrado){
+            return res.status(400).json({
+                status:"error",
+                mensaje:"Error al borrar Articulo."
+            })
+        }
+
+        return res.status(200).json({
+            status:"success",
+            articulo:articuloBorrado,
+            mensaje:"Articulo Borrado"
+        })
+
+    })
+
+
+
+}
+
+
+
+const editar=(req, res)=>{
+    //recoger ID del articulo a editar
+    let id = req.params.id;
+
+    //recoger datos del body
+    let parametros = req.body;
+
+    //validar datos
+    try{
+        validarArticulo(parametros);
+    } catch (error) {
+    return res.status(400).json({
+        status:"error",
+        mensaje:"faltan datos por enviar",
+    });
+    
+}
+    
+    //buscar y actualizar
+
+    Articulo.findOneAndUpdate({_id:id}, parametros,{new:true}, (error, articuloActualizado)=>{
+
+        if( error || !articuloActualizado){
+            return res.status(500).json({
+                status:"error",
+                mensaje:"Error al actualizar Articulo."
+            })
+        }
+
+        return res.status(200).json({
+            status:"success",
+            articulo:articuloActualizado,
+            mensaje:"Articulo Actualizado"
+        })
+
+    })
+
+    //devolver respuesta. 
+
+
+}
+
+
+
 module.exports = {
     prueba,
     curso,
-    crear
+    crear,
+    listar,
+    buscar_articulo,
+    borrar_articulo,
+    editar
 
 }

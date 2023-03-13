@@ -7,6 +7,9 @@ const ArticuloSchema =  Schema({
     contenido:{
         type:String, 
         required:true},
+    autor:{
+        type:String, 
+        required:true},
     fecha:{
         type:Date, 
         default:Date.now},
