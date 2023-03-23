@@ -25,11 +25,6 @@ const rutas_articulos = require("./rutas/articulo");
 //cargando las rutas
 app.use("/api",rutas_articulos);
 
-
-//crear ruta de guardado
-
-
-
 //Pruebas de rutas
 app.get("/probando", (req, res) =>{
     console.log("se ha ejecutado el endpoint desde la consola. ");
