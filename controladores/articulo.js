@@ -67,31 +67,32 @@ const crear=(req, res)=>{
 
 // end-piont para listar datos de la BD
 const listar = (req, res) =>{
-
-    let consulta = Articulo.find({})
-
-    //flag devuelve la cantidad de datos a solicitar
-    consulta.limit(1);
-
-    consulta.sort({fecha:-1}).exec((error, articulos)=>{
-        if(error|| !articulos){
-            return res.status(404).json({
-                status:"error",
-                mensaje:"articulo no encontrado"
-    
-            })
+    setTimeout(()=>{
+        let consulta = Articulo.find({})
+        //flag devuelve la cantidad de datos a solicitar
+        if (req.params.ultimos) {
+            consulta.limit(3);
         }
 
-        return res.status(200).send({
-            status:"success",
-            parametro: req.params.ultimos,
-            articulos,
-        });
-    });
+        consulta.sort({fecha:-1}).exec((error, articulos)=>{
+            if(error|| !articulos){
+                return res.status(404).json({
+                    status:"error",
+                    mensaje:"articulo no encontrado"
+        
+                })
+            }
 
+            return res.status(200).send({
+                status:"success",
+    	    contador:articulos.length,
+                articulos,
+            });
+        });
+    },1000)
 }
 
-// end-piont para buscar dato en la BD
+// end-piont para buscar 1 dato en la BD
 
 const buscar_articulo = (req, res)=>{
 
