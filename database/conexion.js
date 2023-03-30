@@ -5,14 +5,15 @@ const conexion = async()=>{
 
     try {
 
-        await mongoose.connect("mongodb+srv://franciscoalfar:eEuRBTHQAVaLUrcX@cluster0.017jdov.mongodb.net/?retryWrites=true&w=majority");
+        await mongoose.connect("mongodb+srv://franciscoalfar:eEuRBTHQAVaLUrcX@cluster0.017jdov.mongodb.net/mi_blog");
+        
 
         //paramtros dentro de obejeto en caso de problemas de conexion
         //use NewUrlParser:true
         //useUnifiedTopology:true
         //useCreateIndex:true
 
-        console.log("conectado a la BD mi Blog"+mongoose)
+        console.log("conectado a la BD mi Blog")
         
     } catch (error) {
         console.log(error);
