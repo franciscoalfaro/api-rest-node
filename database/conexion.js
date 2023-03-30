@@ -11,7 +11,7 @@ const conexion = async()=>{
         //useUnifiedTopology:true
         //useCreateIndex:true
 
-        console.log("conectado a la BD mi Blog")
+        console.log("conectado a la BD mi Blog"+mongoose)
         
     } catch (error) {
         console.log(error);
