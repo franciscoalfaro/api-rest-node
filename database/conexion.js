@@ -4,7 +4,7 @@ const conexion = async()=>{
 
     try {
 
-        await mongoose.connect("mongodb://mongo:Q5FMMtHH0JQwqMw5BN8c@containers-us-west-82.railway");
+        await mongoose.connect("mongodb://mongo:Q5FMMtHH0JQwqMw5BN8c@containers-us-west-82.railway/blog");
 
         //paramtros dentro de obejeto en caso de problemas de conexion
         //use NewUrlParser:true
