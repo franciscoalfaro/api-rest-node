@@ -5,7 +5,7 @@ const conexion = async()=>{
 
     try {
 
-        await mongoose.connect("mongodb+srv://cluster0.017jdov.mongodb.net/mi_blog" --apiVersion 1 --username franciscoalfar);
+        await mongoose.connect("mongodb+srv://cluster0.017jdov.mongodb.net/mi_blog", '--username franciscoalfar');
         
 
         //paramtros dentro de obejeto en caso de problemas de conexion
