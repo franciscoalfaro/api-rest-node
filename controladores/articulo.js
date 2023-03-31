@@ -89,7 +89,7 @@ const listar = (req, res) =>{
                 articulos,
             });
         });
-    },1000)
+    },100)
 }
 
 // end-piont para buscar 1 dato en la BD
