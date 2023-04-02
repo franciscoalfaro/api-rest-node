@@ -35,15 +35,15 @@ const crear=(req, res)=>{
     });
     
 }
-
     //crear objeto a guardar
     const articulo = new Articulo(parametros);
-    console.log(articulo.titulo)
+    console.log(articulo)
 
     //asignar valores a objeto basado en el modelo (manual o automatico)
 
     //guardar datos en la BD
     articulo.save((error, articuloGuardado)=>{
+        console.log(articuloGuardado)
         if( error || !articuloGuardado){
             return res.status(400).json({
                 status:"error",
@@ -199,8 +199,6 @@ const editar=(req, res)=>{
 
 const subir = (req, res)=>{
 
-    //connfigurar multer
-
     //recoger archivo de imagen 
     if(!req.file && !req.files){
         return res.status(404).json({
@@ -282,6 +280,7 @@ const buscador = (req, res)=>{
     // Find OR
     Articulo.find({"$or": [
         {"titulo":{"$regex":busqueda, "$options":"i"}},
+        {"descripcion":{"$regex":busqueda, "$options":"i"}},
         {"contenido":{"$regex":busqueda, "$options":"i"}},
     ]})
     .sort({fecha:-1})

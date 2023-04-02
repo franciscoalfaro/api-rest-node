@@ -7,6 +7,9 @@ const ArticuloSchema =  Schema({
     contenido:{
         type:String, 
         required:true},
+    descripcion:{
+        type:String, 
+        required:true},
     autor:{
         type:String, 
         required:true},
@@ -16,7 +19,7 @@ const ArticuloSchema =  Schema({
 
     imagen:{
         type:String, 
-        default:"defaul.png"}
+        default:"default.png"}
 });
 
 module.exports= model("Articulo", ArticuloSchema, "articulos");

@@ -1,19 +1,19 @@
-const validator = require("validator")
-const validarArticulo = (parametros)=>{
+const validator = require("validator");
 
-    let validar_titulo = !validator.isEmpty(parametros.titulo) && validator.isLength(parametros.titulo,{min: 5, max:undefined});
-    let validar_contenido= !validator.isEmpty(parametros.contenido);
+const validarArticulo = (parametros) => {
+    
+    let validar_titulo = !validator.isEmpty(parametros.titulo) && validator.isLength(parametros.titulo, {min: 5, max: undefined});
+    let validar_descripcion = !validator.isEmpty(parametros.descripcion);
+    let validar_contenido = !validator.isEmpty(parametros.contenido);
 
-    if(!validar_titulo || !validar_contenido){
-        throw new Error(" informacion no validada");
-    }
-    else{
+ 
+    if(!validar_titulo || ! validar_descripcion || ! validar_contenido){
+        throw new Error("No se ha validado la información !!");
+    }else{
         console.log("datos guardados")
     }
-
-    
 }
 
-module.exports={
+module.exports = {
     validarArticulo
 }
