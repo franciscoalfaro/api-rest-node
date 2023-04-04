@@ -6,6 +6,7 @@ const conexion = async()=>{
     try {
 
         await mongoose.connect("mongodb+srv://franciscoalfar:eEuRBTHQAVaLUrcX@cluster0.017jdov.mongodb.net/mi_blog");
+        res.end('Hello World');
         
 
         //paramtros dentro de obejeto en caso de problemas de conexion
