@@ -1,12 +1,6 @@
-require('dotenv').config();
 const { conexion } = require("./database/conexion")
 const express = require("express")
 const cors = require("cors")
-
-
-const dbHost = process.env.DB_HOST;
-const dbUser = process.env.DB_USER;
-const dbPassword = process.env.DB_PASSWORD;
 
 //nicializar app
 console.log("conectado")
@@ -17,7 +11,7 @@ conexion()
 
 // crear servidor de node
  const app = express();
- const puerto = 3900;
+ const puerto = 3000;
 
  //Configurar cors
  app.use(cors());
