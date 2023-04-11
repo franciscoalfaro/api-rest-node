@@ -1,6 +1,12 @@
+require('dotenv').config();
 const { conexion } = require("./database/conexion")
 const express = require("express")
 const cors = require("cors")
+
+
+const dbHost = process.env.DB_HOST;
+const dbUser = process.env.DB_USER;
+const dbPassword = process.env.DB_PASSWORD;
 
 //nicializar app
 console.log("conectado")
@@ -24,6 +30,8 @@ app.use(express.urlencoded({extended:true}))
 const rutas_articulos = require("./rutas/articulo");
 //cargando las rutas
 app.use("/api",rutas_articulos);
+
+
 
 //Pruebas de rutas
 app.get("/probando", (req, res) =>{
