@@ -1,5 +1,8 @@
 const validator = require("validator");
 
+
+//validar que datos requeridos sean ingresados 
+
 const validarArticulo = (parametros) => {
     
     let validar_titulo = !validator.isEmpty(parametros.titulo) && validator.isLength(parametros.titulo, {min: 5, max: undefined});

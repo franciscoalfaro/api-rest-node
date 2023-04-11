@@ -4,6 +4,7 @@ mongoose.set('strictQuery', false)
 const conexion = async()=>{
 
     try {
+        //conexion mediante url a la BD mongo
 
         await mongoose.connect("mongodb+srv://franciscoalfar:eEuRBTHQAVaLUrcX@cluster0.017jdov.mongodb.net/mi_blog");
         

@@ -2,7 +2,7 @@ const { conexion } = require("./database/conexion")
 const express = require("express")
 const cors = require("cors")
 
-//nicializar app
+//inicializar app
 console.log("conectado")
 
 //conectar a la base de datos
