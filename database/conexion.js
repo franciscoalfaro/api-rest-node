@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+require('dotenv').config();
 mongoose.set('strictQuery', false)
 
 const conexion = async()=>{
@@ -6,14 +7,7 @@ const conexion = async()=>{
     try {
         //conexion mediante url a la BD mongo
 
-        await mongoose.connect("mongodb+srv://franciscoalfar:eEuRBTHQAVaLUrcX@cluster0.017jdov.mongodb.net/mi_blog");
-        
-
-        //paramtros dentro de obejeto en caso de problemas de conexion
-        //use NewUrlParser:true
-        //useUnifiedTopology:true
-        //useCreateIndex:true
-
+        await mongoose.connect(process.env.MONGODB_URI)
         console.log("conectado a la BD mi Blog")
         
     } catch (error) {
