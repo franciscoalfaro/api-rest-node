@@ -1,22 +1,19 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 require('dotenv').config();
-mongoose.set('strictQuery', false)
 
 const conexion = async()=>{
-
     try {
-        //conexion mediante url a la BD mongo
-
-        await mongoose.connect(process.env.MONGODB_URI)
-        console.log("conectado a la BD mi Blog")
+        await mongoose.connect(process.env.MONGODB_URI,)
+        console.log("Connection success BD")
         
     } catch (error) {
         console.log(error);
-        throw new Error(" No se ha podido iniciar la conexion/.");
+        console.log('Intentando nuevamente la conexión en 2 segundos...');
+        setTimeout(conexion, 2000);
         
     }
-
 }
+
 
 
 module.exports ={
