@@ -37,13 +37,11 @@ const crear=(req, res)=>{
 }
     //crear objeto a guardar
     const articulo = new Articulo(parametros);
-    console.log(articulo)
 
     //asignar valores a objeto basado en el modelo (manual o automatico)
 
     //guardar datos en la BD
     articulo.save((error, articuloGuardado)=>{
-        console.log(articuloGuardado)
         if( error || !articuloGuardado){
             return res.status(400).json({
                 status:"error",
@@ -100,8 +98,7 @@ const buscar_articulo = (req, res)=>{
 
     let id= req.params.id;
 
-    console.log(id)
-
+   
     //buscar el articulo
     Articulo.findById(id, (error, articulo)=>{    
         //devolver error
@@ -162,9 +159,10 @@ const editar=(req, res)=>{
     //recoger datos del body
     let parametros = req.body;
 
+
     //validar datos
     try{
-        validarArticulo(parametros);
+        //validarArticulo(parametros);
     } catch (error) {
     return res.status(400).json({
         status:"error",
@@ -208,7 +206,6 @@ const subir = (req, res)=>{
 
     }
 
-    console.log(req.file)
     
     //nombre del archivo
     let nombreArchivo = req.file.originalname;
